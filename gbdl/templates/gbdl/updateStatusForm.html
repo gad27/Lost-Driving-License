@@ -1,0 +1,27 @@
+<!DOCTYPE html> {% extends 'gbdl/dashboard_layout.html' %} {% load crispy_forms_tags %} {% block body %}
+
+<head>
+    <title>{% block title %}Update{% endblock %}</title>
+    <style>
+        #container {
+            margin-left: 25%;
+            width: 100%;
+            padding: 10px;
+        }
+    </style>
+</head>
+<br>
+<div id="container" class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+            <h5>Update</h5>
+            <form action="" method="POST">
+                {% csrf_token %} {{form|crispy}}
+                <input class="btn btn-success" type="submit" name="UPDATE">
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

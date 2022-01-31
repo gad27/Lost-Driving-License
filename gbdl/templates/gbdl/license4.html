@@ -1,0 +1,83 @@
+<!DOCTYPE html> {% extends 'gbdl/dashboard_layout.html' %} {% block body %}
+
+<head>
+    <title>{% block title %}Returned Licenses{% endblock %}</title>
+</head>
+<div>
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} m-2" id="msg" role="alert">
+        {{message}}
+    </div>
+    {% endfor %} {% endif %}
+</div>
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form method="get">
+                {{myFilter.form}}
+                <button class="btn btn-primary" style="background-color: navy; border-color: navy;" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>RETURNED LICENSES</h5>
+            <table class="table table-sm table-borderless table-hover">
+                <tr>
+                    <th>D.L. No</th>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Gender</th>
+                    <th>Action</th>
+                    <th>Returned on</th>
+
+                </tr>
+                {% for i in returned_list %}
+                <tr>
+                    <td>{{i.dln}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.class1}}</td>
+                    <td>{{i.sex}}</td>
+                    <td>{{i.action}}</td>
+                    <td>{{i.returned_on}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-info" href="{% url 'details_returned' i.id %}">SEE DETAILS</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+        <div class="float-right">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if returned_list.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ returned_list.previous_page_number }}">previous</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        Page {{ returned_list.number }} of {{ returned_list.paginator.num_pages }}.
+                    </span> {% if returned_list.has_next %}
+                <a href="?page={{ returned_list.next_page_number }}">next</a>
+                <a href="?page={{ returned_list.paginator.num_pages }}">last &raquo;</a> {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $().alert();
+
+    setTimeout(function() {
+        $('.alert').alert('close')
+    }, 3000);
+</script>
+{% endblock %}

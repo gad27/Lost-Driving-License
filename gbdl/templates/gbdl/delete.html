@@ -1,0 +1,29 @@
+<!DOCTYPE html> {% extends 'gbdl/dashboard_layout.html' %} {% load static %} {% block body %}
+
+<head>
+    <title>{% block title %}Delete {% endblock %}</title>
+    <style>
+        #container {
+            margin-left: 25%;
+            width: 100%;
+            padding: 10px;
+        }
+    </style>
+</head>
+<br>
+<div id="container" class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+
+            <p>Are you Sure you want to DELETE "{{item}}"?</p>
+            <form action="{% url 'delete_lice' item.id %}" method="POST">
+                {% csrf_token %}
+                <a class="btn btn-warning" href="{% url 'license' %}" style="color: whitesmoke;">Cancel</a>
+                <input class="btn btn-danger" type="submit" name="CONFIRM">
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div>
+        {% if messages %} {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} m-2" id="msg" role="alert">
+            {{message}}
+        </div>
+        {% endfor %} {% endif %}
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-center text-default  mb-3" id="add license">
+                    <div class="card-header" style="background-color: navy;">
+                        <h5 class="card-title" style="color: whitesmoke;">ADD A FOUND LICENSE</h5>
+                    </div>
+                    <div class="card-body">
+                        <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'create_lice' %}"><strong>Add A Found License</strong> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-center text-default  mb-3" id="add a lost license">
+                    <div class="card-header" style="background-color: navy;">
+                        <h5 class="card-title" style="color: whitesmoke;">ADD A LOST LICENSE</h5>
+                    </div>
+                    <div class="card-body">
+                        <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'lost_lice' %}"><strong>Add A Lost License</strong></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $().alert();
+
+        setTimeout(function() {
+            $('.alert').alert('close')
+        }, 3000);
+    </script>
+
+</body>
+
+</html>

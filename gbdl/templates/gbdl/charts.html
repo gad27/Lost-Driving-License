@@ -1,0 +1,173 @@
+<!DOCTYPE html> {% extends 'gbdl/dashboard_layout.html' %} {% block body %}
+
+<head>
+    <title>{% block title %}Charts{% endblock %}</title>
+</head>
+
+<div id="reportPage">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card bg-white text-black shadow md-4 d-flex flex-column justify-content-center align-items-center">
+                <h5 class="text-center">ALL LICENSES</h5> <br>
+                <canvas id="myChart" width="400" height="150"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-white text-black shadow md-4 d-flex flex-column justify-content-center align-items-center">
+                <h5 class="text-center">SUBMITTED(FOUND) Vs LOST LICENSES</h5> <br>
+                <canvas id="myChart1" width="400" height="150"></canvas>
+            </div>
+        </div>
+    </div><br>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card bg-white text-black shadow md-4 d-flex flex-column justify-content-center align-items-center">
+                <h5 class="text-center">DECLARED vs RETURNED LICENSES</h5> <br>
+                <canvas id="myChart2" width="400" height="150"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-white text-black shadow md-4 d-flex flex-column justify-content-center align-items-center">
+                <h5 class="text-center">SUBMITTED(FOUND) vs RETURNED LICENCES</h5> <br>
+                <canvas id="myChart3" width="400" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Submitted(Found)', 'Lost', 'Declared', 'Returned'],
+            datasets: [{
+                label: '# of Licenses',
+                data: ["{{non_declared}}", "{{lost}}", "{{declared}}", "{{returned}}"],
+                backgroundColor: [
+                    'rgba(3, 52, 83, 1)',
+                    'rgba(5, 112, 145, 1)',
+                    'rgba(0, 128, 128, 1)',
+                    'rgba(99, 143, 169, 1)',
+                ],
+                borderColor: [
+                    'rgba(3, 52, 83, 1)',
+                    'rgba(5, 112, 145, 1)',
+                    'rgba(0, 128, 128, 1)',
+                    'rgba(99, 143, 169, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    gridLines: {
+                        display: true
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        display: true
+                    },
+                }],
+            }
+        }
+    });
+</script>
+
+
+<script>
+    var ctx = document.getElementById('myChart1').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Submitted(Found)', 'Lost'],
+            datasets: [{
+                label: 'Licenses',
+                data: ["{{non_declared}}", "{{lost}}"],
+                backgroundColor: [
+                    'rgba(3, 52, 83, 1)',
+                    'rgba(5, 112, 145, 1)',
+                ],
+                borderColor: [
+                    'rgba(3, 52, 83, 1)',
+                    'rgba(5, 112, 145, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+<script>
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Declared', 'Returned'],
+            datasets: [{
+                label: 'Licenses',
+                data: ["{{declared}}", "{{returned}}"],
+                backgroundColor: [
+                    'rgba(0, 128, 128, 1)',
+                    'rgba(99, 143, 169, 1)',
+                ],
+                borderColor: [
+                    'rgba(0, 128, 128, 1)',
+                    'rgba(99, 143, 169, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+<script>
+    var ctx = document.getElementById('myChart3').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Submitted(Found)', 'Returned'],
+            datasets: [{
+                label: 'Licenses',
+                data: ["{{non_declared}}", "{{returned}}"],
+                backgroundColor: [
+                    'rgba(3, 52, 83, 1)',
+                    'rgba(99, 143, 169, 1)',
+                ],
+                borderColor: [
+                    'rgba(3, 52, 83, 1)',
+                    'rgba(99, 143, 169, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

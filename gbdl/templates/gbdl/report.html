@@ -1,0 +1,85 @@
+<!DOCTYPE html> {% extends 'gbdl/dashboard_layout.html' %} {% block body %}
+
+<head>
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon1.ico'%}" />
+    <title>{% block title %}Reports{% endblock %}</title>
+    <style>
+        #center {
+            display: inline;
+        }
+        
+        #d1 {
+            visibility: hidden;
+        }
+    </style>
+    <script>
+        function showHidenInfo() {
+            if (document.getElementById('d')) {
+                document.getElementById('d1').style.visibility = 'visible';
+            } else {
+                document.getElementById('d1').style.visibility = 'hidden'
+            }
+        }
+    </script>
+</head>
+<br>
+<div class="row">
+    <div class="col">
+        <form method="GET" action="">
+            {% csrf_token %}
+            <div class="card card-body">
+                <di>
+                    <label for="type">Choose:</label>
+                    <select id="type" name="s" style="width: 150px;display: inline;">
+                    <option value="" disabled selected hidden>Select...</option>
+                    <option value="NOT DECLARED">Submitted (Found)</option>
+                    <option value="LOST">Lost</option>
+                    <option value="DECLARED" id="d">Declared</option>
+                    <option value="RETURNED">Returned</option>
+                </select>
+                    <!--
+                    <input type="checkbox" id="not" name="c" value="NOT DECLARED">
+                    <label for="not"> NOT DECLARED</label><br>
+                    <input type="checkbox" id="los" name="c" value="LOST">
+                    <label for="los"> LOST</label><br>
+                    <input type="checkbox" id="dec" name="c" value="DECLARED">
+                    <label for="dec"> DECLARED</label><br>
+                    <input type="checkbox" id="re" name="c" value="RETURNED">
+                    <label for="re"> RETURNED</label><br>
+                    -->
+                </di>
+                <div id="center">
+                    <hr/>Entered into the system on<br> From: <input type="date" name="fromdate" style="width: 150px;" /> To: <input type="date" name="todate" style="width: 150px;" /><br>
+                    <!--Declared on<br> From: <input type="date" name="fromdate1" style="width: 150px;"
+                    /> To:
+                    <input type="date" name="todate1" style="width: 150px;" /><br> Returned on<br> From: <input type="date" name="fromdate2" style="width: 150px;" /> To: <input type="date" name="todate2" style="width: 150px;" /><br>-->
+                </div><br>
+                <input style="background-color: navy; border-color: navy; color: whitesmoke; border-radius: 98px; width: 160px;" type="submit" value="Generate pdf">
+                <hr/>
+                <!--<div class="card card-body">
+                    <table class="table table-sm table-borderless table-hover">
+                        <tr>
+                            <th>D.L. No</th>
+                            <th>Name</th>
+                            <th>Class</th>
+                            <th>Status</th>
+                            <th>Added on</th>
+                        </tr>
+                        {% for i in results %}
+                        <tr>
+                            <td>{{i.dln}}</td>
+                            <td>{{i.name}}</td>
+                            <td>{{i.class1}}</td>
+                            <td>{{i.status}}</td>
+                            <td>{{i.date_added_on}}</td>
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+                </div> -->
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

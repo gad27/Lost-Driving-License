@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+{% extends 'gbdl/base.html' %} {% block content %}
+
+<head>
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon1.ico'%}" />
+    <title>{% block title %}GBDL Citizen{% endblock %}</title>
+</head>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>License</h5>
+            <hr>
+            <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'lost_lice_user' %}">Report Lost License</a>
+
+        </div>
+    </div>
+</div>
+
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form method="get">
+                {{myFilter.form}}
+                <button class="btn btn-primary" style="background-color: navy; border-color: navy;" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>LICENSES</h5>
+            <table class="table table-sm">
+                <tr>
+                    <th>D.L. No</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Class</th>
+                </tr>
+                {% for i in user_list %}
+                <tr>
+                    <td>{{i.dln}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.sex}}</td>
+                    <td>{{i.class1}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-info" href="{% url 'details_declared_user' i.id %}">SEE DETAILS</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+</html>

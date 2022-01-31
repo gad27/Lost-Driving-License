@@ -1,0 +1,35 @@
+<!DOCTYPE html> {% extends 'gbdl/dashboard_layout.html' %} {% block body %}
+
+<head>
+    <title>{% block title %}Reort{% endblock %}</title>
+    <style>
+        .button:hover {
+            background-color: lightskyblue;
+        }
+    </style>
+</head>
+<div class="card card-body">
+    <form method="GET">
+        <input name="pdf" style="background-color: navy; border-color: navy; color: whitesmoke; border-radius: 98px; width: 150px;" type="submit" value="Submit">
+    </form>
+    <table class="table table-sm table-borderless table-hover">
+        <tr>
+            <th>D.L. No</th>
+            <th>Name</th>
+            <th>Class</th>
+            <th>Status</th>
+            <th>Added on</th>
+        </tr>
+        {% for i in results %}
+        <tr>
+            <td>{{i.dln}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.class1}}</td>
+            <td>{{i.status}}</td>
+            <td>{{i.date_added_on}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+{% endblock %}

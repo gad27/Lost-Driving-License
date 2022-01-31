@@ -1,0 +1,76 @@
+<!DOCTYPE html> {% extends 'gbdl/dashboard_layout.html' %} {% block body %}
+
+<head>
+    <title>{% block title %}Details for {{i.name}} {% endblock %}</title>
+</head>
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>{{i.name}}</h5>
+            <table class="table table-sm table-borderless">
+                <tr>
+                    <th>D.L. No</th>
+                    <td>{{i.dln}}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{i.name}}</td>
+                </tr>
+                <tr>
+                    <th>Date of Birth</th>
+                    <td>{{i.dob}}</td>
+                </tr>
+                <tr>
+                    <th>Class</th>
+                    <td>{{i.class1}}</td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>{{i.sex}}</td>
+                </tr>
+                <tr>
+                    <th>Place of Issue</th>
+                    <td>{{i.place}}</td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    {% if i.phone == '+250' %}
+                    <td>None</td>
+                    {% else %}
+                    <td>{{i.phone}}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Action</th>
+                    <td>{{i.action}}</td>
+                </tr>
+                <tr>
+                    <th>Submitted on</th>
+                    <td>{{i.date_added_on}}</td>
+                </tr>
+                <tr>
+                    <th>Found on</th>
+                    <td>{{i.found_on}}</td>
+                </tr>
+                <tr>
+                    <th>Declared on</th>
+                    <td>{{i.declared_on}}</td>
+                </tr>
+                <tr>
+                    <th>Returned on</th>
+                    <td>{{i.returned_on}}</td>
+                </tr>
+                <br>
+                <td>
+                    <a class="btn btn-sm btn-info" href="{% url 'update_lice_act' i.id %}">UPDATE</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-danger" href="{% url 'delete_lice' i.id %}">DELETE</a>
+                </td>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

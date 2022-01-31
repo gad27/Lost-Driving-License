@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon1.ico'%}" />
+    <title>Report</title>
+
+    <style>
+        @page {
+            size: "a4";
+            margin: 2.5cm 1.5cm 3.5cm 1.5cm;
+            @frame footer_frame {
+                -pdf-frame-content: footer_content;
+                right: 50pt;
+                width: 512pt;
+                top: 772pt;
+                height: 20pt;
+            }
+        }
+        
+        body {
+            font-weight: 200;
+            font-size: 10px;
+        }
+        
+        .content-table {
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 1rem;
+            min-width: 400px;
+            width: -webkit-fill-available;
+        }
+        
+        th,
+        td {
+            padding: 3px 5px;
+        }
+        
+        .details {
+            padding: 10px 20px 0px 20px;
+            text-align: left !important;
+            /*margin-left: 40%;*/
+        }
+        
+        img {
+            zoom: 80%;
+        }
+    </style>
+</head>
+<img src="/1.My Documents/1.STUDIES/Research Project/Project/GBDL1/static/images/OG1.png" alt="logo" height="150px">
+<div class="details">
+    Reporter: {{userName}}<br> Generated on: {{date1}}
+</div>
+<h1 style="text-align: center;"><strong>GET BACK THE DRVING LICENSE REPORT</strong></h1>
+{% if type1 == 'NOT DECLARED' %}
+<h2 style="text-align: center;">REPORT OF SUBMITTED LICENSES </h2>
+{% else %}
+<h2 style="text-align: center;">REPORT OF {{type1}} LICENSES </h2>
+{% endif %}
+
+
+<body>
+    <table class="content-table">
+        <tr>
+            <th>D.L. No</th>
+            <th>Name</th>
+            <th>Class</th>
+            <th>Phone</th>
+            {% if type1 != 'RETURNED'%}
+            <th>Submitted on</th>
+            <th>Status</th>
+            {% endif %} {% if type1 == 'LOST' %}
+            <th>Group</th>
+            {% endif %} {% if type1 == 'DECLARED' or type1 == 'RETURNED' %}
+            <th>Declared on</th>
+            {% endif %} {% if type1 == 'RETURNED' %}
+            <th>Action</th>
+            <th>Returned on</th>
+            {% endif %}
+        </tr>
+        {% for i in results %}
+        <tr>
+            <td style="text-align: left;">{{i.dln}}</td>
+            <td style="text-align: center;">{{i.name}}</td>
+            <td style="text-align: center;">{{i.class1}}</td>
+            <td style="text-align: center;">{{i.phone}}</td>
+            {% if type1 != 'RETURNED' %}
+            <td style="text-align: center;">{{i.date_added_on}}</td>
+            <td style="text-align: center;">{{i.status}}</td>
+            {% endif %} {% if i.group1 == 'LOST' %}
+            <td style="text-align: center;">{{i.group1}}</td>
+            {% endif %} {% if type1 == 'DECLARED' or type1 == 'RETURNED' %}
+            <td style="text-align: center;">{{i.declared_on}}</td>
+            {% endif %} {% if i.action == 'RETURNED' %}
+            <td style="text-align: center;">{{i.action}}</td>
+            <td style="text-align: center;">{{i.returned_on}}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="frame" id="footer_content"> Copyright GBDL 2021 - page
+        <pdf:pagenumber></pdf:pagenumber>
+        of
+        <pdf:pagecount></pdf:pagecount>
+    </div>
+</body>
+
+</html>

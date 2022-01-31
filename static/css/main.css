@@ -1,0 +1,23 @@
+body {
+    background-color: #ebeff5;
+}
+
+#total {
+    background-color: #28464b;
+}
+
+#non-declared {
+    background-color: #7abecc;
+}
+
+#declared {
+    background-color: #7CD1C0;
+}
+
+#reported-missed {
+    background-color: #7abecc;
+}
+
+#reprted-found {
+    background-color: #7CD1C0;
+}

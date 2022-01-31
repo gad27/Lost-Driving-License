@@ -1,0 +1,30 @@
+<!DOCTYPE html> {% extends 'gbdl/dashboard_layout.html' %} {% block body %}
+
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>{{i.name}}</h5>
+            <table class="table table-sm table-borderless">
+                <tr>
+                    <th>D.L. No</th>
+                    <td>{{i.dln}}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{i.name}}</td>
+                </tr>
+                <tr>
+                    <th>Date of Birth</th>
+                    <td>{{i.dob}}</td>
+                </tr>
+                <tr>
+                    <th>Class</th>
+                    <td>{{i.class1}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
